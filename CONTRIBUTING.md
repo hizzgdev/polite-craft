@@ -5,7 +5,8 @@ Thank you for your interest in contributing.
 ## Setup
 
 ```bash
-git clone https://github.com/hizzgdev/polite-craft.git
+git clone https://gitee.com/hizzgdev/polite-craft.git
+# 或 git clone https://github.com/hizzgdev/polite-craft.git
 cd polite-craft
 npm install
 npm run build

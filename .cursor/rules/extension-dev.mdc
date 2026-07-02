@@ -1,0 +1,43 @@
+---
+description: MV3 Chrome extension conventions for Polite Craft src/
+globs: src/**/*
+alwaysApply: false
+---
+
+# Polite Craft — extension development
+
+## Source of truth
+
+- Edit only `src/`. Run `npm run build` to refresh `dist/`.
+- Do not hand-edit `dist/`.
+
+## Manifest V3
+
+- `background.js` is a service worker: no `document`, no DOM APIs.
+- Use `chrome.runtime.onMessage` / `sendMessage` for content ↔ background communication.
+- Persist settings with `chrome.storage.local`.
+
+## GitHub content script
+
+- `content.js` injects a toolbar below comment composers on `https://github.com/*`.
+- GitHub is a React SPA: keep `MutationObserver` and multiple insert paths (footer, wrapper, sibling, fallback).
+- Test DOM changes with `npm test` and manual verification on a real GitHub PR/Issue page.
+
+## API & secrets
+
+- DeepSeek API key comes from user settings only — never commit keys or `.env`.
+- Host permission for `api.deepseek.com` is required for fetch from the service worker.
+
+## Testing
+
+After changing `background.js` or `content.js`:
+
+```bash
+npm test
+npm run build
+```
+
+## Style
+
+- Match existing code: plain JS, minimal abstractions, focused diffs.
+- User-facing strings in the extension UI are Chinese; code comments may be Chinese or English.

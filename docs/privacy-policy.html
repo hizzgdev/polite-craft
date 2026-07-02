@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GitHub 得体英文 — 隐私权政策</title>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --text: #1f2328;
+      --muted: #656d76;
+      --border: #d0d7de;
+      --bg: #ffffff;
+      --surface: #f6f8fa;
+      --link: #0969da;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --text: #e6edf3;
+        --muted: #8b949e;
+        --border: #30363d;
+        --bg: #0d1117;
+        --surface: #161b22;
+        --link: #58a6ff;
+      }
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 2rem 1rem 3rem;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--text);
+      background: var(--bg);
+    }
+
+    main {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      font-size: 1.75rem;
+      line-height: 1.25;
+      margin: 0 0 0.5rem;
+    }
+
+    h2 {
+      font-size: 1.25rem;
+      margin: 2rem 0 0.75rem;
+      padding-top: 0.5rem;
+      border-top: 1px solid var(--border);
+    }
+
+    h2:first-of-type {
+      border-top: none;
+      padding-top: 0;
+    }
+
+    h3 {
+      font-size: 1.05rem;
+      margin: 1.25rem 0 0.5rem;
+    }
+
+    p {
+      margin: 0.75rem 0;
+    }
+
+    .updated {
+      color: var(--muted);
+      font-size: 0.95rem;
+      margin-bottom: 1.5rem;
+    }
+
+    ul {
+      margin: 0.5rem 0 0.75rem;
+      padding-left: 1.25rem;
+    }
+
+    li {
+      margin: 0.35rem 0;
+    }
+
+    a {
+      color: var(--link);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 0.75rem 0 1rem;
+      font-size: 0.95rem;
+    }
+
+    th,
+    td {
+      border: 1px solid var(--border);
+      padding: 0.6rem 0.75rem;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background: var(--surface);
+      font-weight: 600;
+    }
+
+    code {
+      font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+      font-size: 0.9em;
+      padding: 0.1em 0.35em;
+      border-radius: 4px;
+      background: var(--surface);
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 2rem 0;
+    }
+
+    .summary {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem 1.25rem;
+    }
+
+    .summary h2 {
+      border-top: none;
+      margin-top: 0;
+      padding-top: 0;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>GitHub 得体英文 — 隐私权政策</h1>
+    <p class="updated"><strong>最后更新：2026 年 6 月 26 日</strong></p>
+
+    <p>本隐私权政策说明 Chrome 扩展程序 <strong>「GitHub 得体英文」</strong>（以下简称「本扩展」）如何处理与用户相关的信息。安装或使用本扩展，即表示你理解并同意本政策。</p>
+
+    <h2>1. 概述</h2>
+    <p>本扩展帮助用户在 GitHub Pull Request / Issue 评论框中，将中文草稿转换为得体、可直接发送的英文回复。</p>
+    <p><strong>我们不会运营自己的后端服务器来收集或存储你的数据。</strong> 本扩展在本地浏览器中保存少量配置；在你主动点击「Generate English」时，读取当前 GitHub 页面上的公开信息，并将相关内容发送到你自行配置的 <strong>DeepSeek API</strong> 以生成英文结果。</p>
+
+    <h2>2. 我们处理哪些信息</h2>
+
+    <h3>2.1 保存在你设备本地的信息</h3>
+    <p>通过 Chrome 的 <code>chrome.storage.local</code>，本扩展仅在本地保存以下配置：</p>
+    <table>
+      <thead>
+        <tr>
+          <th>数据项</th>
+          <th>用途</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>DeepSeek API Key</td>
+          <td>调用 DeepSeek API 生成英文</td>
+        </tr>
+        <tr>
+          <td>语气偏好（tone）</td>
+          <td>记住你选择的写作风格</td>
+        </tr>
+        <tr>
+          <td>关系偏好（relationship）</td>
+          <td>记住你与评论对象的关系设定</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>上述数据<strong>仅保存在你的浏览器本地</strong>，不会上传至扩展开发者运营的服务器，也不会通过 <code>chrome.storage.sync</code> 同步到其他设备。</p>
+
+    <h3>2.2 在你主动使用时临时读取的信息</h3>
+    <p>仅当你点击 <strong>「Generate English」</strong> 时，本扩展会从当前 GitHub 页面读取与该评论相关的<strong>公开可见</strong>信息，例如：</p>
+    <ul>
+      <li>PR / Issue 标题</li>
+      <li>PR / Issue 描述（截取前 500 字符）</li>
+      <li>你正在回复的评论内容（如有，截取前 300 字符）</li>
+      <li>最近若干条对话摘要（每条截取前 200 字符）</li>
+    </ul>
+    <p>本扩展<strong>不会</strong>在后台持续扫描页面，也<strong>不会</strong>在你未点击生成按钮时自动读取上述内容。</p>
+
+    <h3>2.3 发送给 DeepSeek API 的信息</h3>
+    <p>为生成英文回复，本扩展会将以下信息通过 HTTPS 发送至 <strong>DeepSeek 官方 API</strong>（<code>https://api.deepseek.com</code>）：</p>
+    <ul>
+      <li>你在评论框中输入的中文草稿</li>
+      <li>上述页面上下文（经处理后用于 Prompt）</li>
+      <li>你选择的语气与关系偏好</li>
+    </ul>
+    <p><strong>关于对话参与者：</strong> 发送给 AI 的对话上下文中，参与者以 <code>current user</code>、<code>user1</code>、<code>user2</code> 等匿名角色标签表示，<strong>不会</strong>将 GitHub 用户名与真实身份的对应关系一并发送。</p>
+    <p>此外，在设置页保存 API Key 时，本扩展可能向 DeepSeek 发起一次轻量级请求以校验 Key 是否有效。</p>
+
+    <h2>3. 我们不收集、不存储的信息</h2>
+    <p>本扩展<strong>不会</strong>：</p>
+    <ul>
+      <li>收集、出售或出租你的个人信息用于广告</li>
+      <li>建立用户画像或进行行为分析、统计追踪</li>
+      <li>持久化保存你的评论内容、翻译结果或页面上下文</li>
+      <li>读取或访问 GitHub 以外的网站</li>
+      <li>代替你自动发送评论</li>
+      <li>在扩展包外加载或执行远程代码</li>
+    </ul>
+    <p>本扩展<strong>不会</strong>保存你的浏览历史、Cookie、密码或其他与核心功能无关的数据。</p>
+
+    <h2>4. 数据存储位置与保留期限</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>数据类型</th>
+          <th>存储位置</th>
+          <th>保留期限</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>API Key、语气、关系偏好</td>
+          <td>本地 <code>chrome.storage.local</code></td>
+          <td>直至你清除、覆盖或卸载扩展</td>
+        </tr>
+        <tr>
+          <td>页面上下文、中文草稿</td>
+          <td>仅内存中临时使用</td>
+          <td>请求完成后不保留</td>
+        </tr>
+        <tr>
+          <td>翻译结果</td>
+          <td>写回评论框供你编辑</td>
+          <td>不写入本地 storage</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>卸载本扩展后，保存在本地的配置将随浏览器扩展数据一并移除（具体行为取决于 Chrome 的扩展数据管理机制）。</p>
+
+    <h2>5. 第三方服务</h2>
+
+    <h3>5.1 DeepSeek</h3>
+    <p>本扩展依赖你自行申请并配置的 <strong>DeepSeek API</strong>。你向 DeepSeek 发送的数据受其隐私政策与服务条款约束。请在 <a href="https://platform.deepseek.com" rel="noopener noreferrer">DeepSeek 平台</a> 查阅相关说明。</p>
+    <p><strong>重要：</strong> API Key 由你本人提供并保存在本地。扩展开发者无法访问你的 API Key，也不托管任何中转服务。</p>
+
+    <h3>5.2 GitHub</h3>
+    <p>本扩展仅在 <code>https://github.com/*</code> 页面注入内容脚本，读取页面上已公开显示的信息。本扩展与 GitHub / Microsoft 无隶属关系。</p>
+
+    <h2>6. 权限说明</h2>
+    <p>本扩展声明的权限均用于实现上述功能：</p>
+    <ul>
+      <li><code>storage</code>：在本地保存 API Key 与偏好设置</li>
+      <li><code>https://github.com/*</code>：在 GitHub 页面注入工具栏并读取评论相关上下文</li>
+      <li><code>https://api.deepseek.com/*</code>：调用 DeepSeek API 生成英文并校验 API Key</li>
+    </ul>
+    <p>本扩展不请求 <code>activeTab</code> 等额外权限。</p>
+
+    <h2>7. 你的选择与权利</h2>
+    <p>你可以随时：</p>
+    <ul>
+      <li>在扩展设置页修改或清空 DeepSeek API Key</li>
+      <li>修改语气、关系等偏好</li>
+      <li>在发送前编辑或删除生成的英文内容</li>
+      <li>通过 Chrome 扩展管理页（<code>chrome://extensions</code>）禁用或卸载本扩展</li>
+    </ul>
+    <p>卸载后，本地保存的配置将不再可用。</p>
+
+    <h2>8. 儿童隐私</h2>
+    <p>本扩展面向开发者协作场景，并非面向 13 岁以下儿童。我们不会有意收集儿童个人信息。</p>
+
+    <h2>9. 政策变更</h2>
+    <p>我们可能会更新本隐私权政策。更新后会在本页面修改「最后更新」日期。若变更涉及数据处理方式的重要调整，我们会通过 Chrome Web Store 商品页或扩展内适当方式告知。</p>
+
+    <h2>10. 联系我们</h2>
+    <p>如对本隐私权政策或数据处理有疑问，请通过 <strong>Chrome Web Store 中本扩展商品页的开发者联系方式</strong> 与我们沟通。</p>
+
+    <hr>
+
+    <section class="summary" lang="en">
+      <h2>English Summary</h2>
+      <p><strong>GitHub 得体英文</strong> is a Chrome extension that helps you draft English replies on GitHub PR/Issue comment boxes. We do not operate a backend that collects your data. Your API key and preferences are stored locally via <code>chrome.storage.local</code>. When you click &quot;Generate English&quot;, the extension reads public GitHub page context and your Chinese draft, then sends that information to <strong>DeepSeek API</strong> (configured by you) to generate English text. We do not sell data, run analytics, persist page content, or auto-post comments. Uninstalling the extension removes locally stored settings.</p>
+    </section>
+  </main>
+</body>
+</html>

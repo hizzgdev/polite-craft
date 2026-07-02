@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Test PR #123 · org/repo</title>
+  <style>
+    body { font-family: sans-serif; padding: 20px; }
+    .discussion-item { margin: 20px 0; }
+    .form-actions { margin-top: 10px; }
+    textarea { width: 100%; min-height: 100px; padding: 8px; }
+  </style>
+</head>
+<body>
+  <h1>Test PR: Fix memory leak</h1>
+
+  <div id="discussion_bucket">
+    <div class="discussion-item">
+      <h3>Comment 1</h3>
+      <p>This is a test comment.</p>
+    </div>
+
+    <div class="discussion-item">
+      <h3>Add a comment</h3>
+      <form class="js-new-comment-form">
+        <textarea id="new_comment_field" class="js-comment-field"
+                  placeholder="Leave a comment"></textarea>
+        <div class="form-actions">
+          <button type="submit">Comment</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="all_commit_comments">
+    <h3>Commit Comments</h3>
+    <form class="js-comment-update">
+      <textarea class="js-comment-field" placeholder="Reply..."></textarea>
+    </form>
+  </div>
+</body>
+</html>

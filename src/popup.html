@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Polite Craft Settings</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <header>
+    <div class="logo-row">
+      <span class="logo-icon">🔤</span>
+      <h1>Polite Craft</h1>
+    </div>
+    <p class="subtitle">Write Chinese → Get professional English</p>
+  </header>
+
+  <section class="settings-section">
+    <h2>API Settings</h2>
+    <div class="field">
+      <label for="apiKey">DeepSeek API Key</label>
+      <input type="password" id="apiKey" placeholder="sk-xxxxxxxxxxxxxxxx" autocomplete="off" />
+      <div class="hint">
+        Your key is stored locally only. Never uploaded anywhere.
+        Get one at <a href="https://platform.deepseek.com" target="_blank">platform.deepseek.com</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="settings-section">
+    <h2>Defaults</h2>
+    <div class="field">
+      <label for="defaultTone">Default Tone</label>
+      <select id="defaultTone">
+        <option value="constructive">建议</option>
+        <option value="encouraging">鼓励</option>
+        <option value="direct">直接</option>
+        <option value="formal">正式</option>
+        <option value="request">请求</option>
+        <option value="inquiry">询问</option>
+      </select>
+    </div>
+    <div class="field">
+      <label for="defaultRelationship">Default Relationship</label>
+      <select id="defaultRelationship">
+        <option value="contributor">社区贡献者</option>
+        <option value="maintainer">社区维护者</option>
+        <option value="colleague">同事</option>
+        <option value="close_teammate">熟人/长期合作</option>
+        <option value="superior">上级/负责人</option>
+      </select>
+    </div>
+  </section>
+
+  <footer>
+    <button id="saveBtn" class="save-btn">Save Settings</button>
+    <span id="saveStatus" class="save-status"></span>
+  </footer>
+
+  <script src="popup.js"></script>
+</body>
+</html>

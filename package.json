@@ -1,0 +1,11 @@
+{
+  "name": "polite-craft",
+  "scripts": {
+    "build": "node scripts/build.js",
+    "test": "node tests/background.test.js && node tests/content.test.js",
+    "test:e2e": "npm run build && python3 tests/test_extension.py"
+  },
+  "devDependencies": {
+    "jsdom": "^29.1.1"
+  }
+}

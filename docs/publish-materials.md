@@ -84,7 +84,7 @@ GitHub 得体英文 只做一件事：当你在 GitHub 的 Pull Request 或 Issu
 
 **2. `https://api.deepseek.com/*`**
 
-用于将用户的中文草稿及页面上下文发送至用户自行配置的 DeepSeek API（默认服务），以获取英文翻译结果；同时在用户于设置页保存 API Key 时，发起一次轻量级请求以校验 Key 是否有效。
+用于将用户的中文草稿及页面上下文发送至用户自行配置的 DeepSeek API（默认服务），以获取英文翻译结果；同时在用户于设置页保存 API Key 时，发起一次轻量级请求以校验 Key 是否有效。不配置 DeepSeek 地址或切换至其他 API 服务时不会访问该域名。
 
 **3. `https://token-plan.cn-beijing.maas.aliyuncs.com/*`**
 

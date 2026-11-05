@@ -84,7 +84,7 @@ GitHub 得体英文 只做一件事：当你在 GitHub 的 Pull Request 或 Issu
 
 **2. `https://api.deepseek.com/*`**
 
-用于将用户的中文草稿及页面上下文发送至用户自行配置的 DeepSeek API（默认服务），以获取英文翻译结果；同时在用户于设置页保存 API Key 时，发起一次轻量级请求以校验 Key 是否有效。不配置 DeepSeek 地址或切换至其他 API 服务时不会访问该域名。
+用于将用户的中文草稿及页面上下文发送至用户自行配置的 DeepSeek API，以获取英文翻译结果；同时在用户于设置页保存 API Key 时，发起一次轻量级请求以校验 Key 是否有效。不配置 DeepSeek 地址或切换至其他 API 服务时不会访问该域名。
 
 **3. `https://token-plan.cn-beijing.maas.aliyuncs.com/*`**
 
@@ -98,7 +98,7 @@ GitHub 得体英文 只做一件事：当你在 GitHub 的 Pull Request 或 Issu
 
 本扩展的全部 JavaScript 均打包在扩展程序内，包括 `background.js`、`content.js`、`popup.js` 等，不通过 `<script src="...">` 引用外部 JS 文件，不使用 `eval()` 或 `new Function()` 执行远程传入的代码字符串，也不加载外部 WebAssembly 模块。
 
-扩展在运行时会向用户配置的 AI API 服务（默认 DeepSeek）发起 HTTPS 网络请求，但仅传输用户草稿、页面上下文等文本数据，并接收 JSON 格式的 API 响应；返回内容仅作为文本结果写回评论框，**不会在浏览器中作为代码下载或执行**。因此，这不属于 Chrome Web Store 所定义的「远程代码」。
+扩展在运行时会向用户配置的 AI API 服务发起 HTTPS 网络请求，但仅传输用户草稿、页面上下文等文本数据，并接收 JSON 格式的 API 响应；返回内容仅作为文本结果写回评论框，**不会在浏览器中作为代码下载或执行**。因此，这不属于 Chrome Web Store 所定义的「远程代码」。
 
 综上，本扩展符合「所有可执行逻辑均包含在提交包内」的要求，不依赖远程代码实现核心功能。
 

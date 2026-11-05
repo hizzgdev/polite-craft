@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "GitHub 得体英文",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "面向中文用户：在 GitHub PR / Issue 评论框用中文打草稿，一键生成得体、可直接发送的英文回复。",
   "permissions": ["storage"],
   "host_permissions": [

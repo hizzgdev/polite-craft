@@ -71,6 +71,8 @@
     '[data-testid="comment-composer"] textarea',
     '#react-issue-comment-composer textarea',
     'textarea[aria-labelledby*="comment-composer"]',
+    'td[role="dialog"] textarea',
+    'form.js-inline-comment-form textarea',
     'textarea#new_comment_field',
     'textarea.js-comment-field',
     'form.js-new-comment-form textarea',
@@ -84,7 +86,8 @@
     return !!el.closest(
       '[data-testid="comment-composer"], #react-issue-comment-composer, '
       + 'form.js-new-comment-form, form.js-comment-update, '
-      + '#discussion_bucket, #all_commit_comments, .review-comment'
+      + '#discussion_bucket, #all_commit_comments, .review-comment, '
+      + 'td[role="dialog"], .review-thread-reply'
     );
   }
 
@@ -264,7 +267,36 @@
         inserted = true;
         console.log("[Polite Craft] Appended to comment composer (React GitHub)");
       }
-    } else if (markdownInput) {
+    }
+
+    // Strategy 1b: PR review inline comment dialog
+    if (!inserted) {
+      const dialog = textarea.closest('td[role="dialog"]');
+      if (dialog) {
+        const footer = dialog.querySelector('[data-testid="markdown-editor-footer"], [class*="Footer-module__footer"]');
+        if (footer) {
+          footer.before(toolbar);
+          inserted = true;
+          console.log("[Polite Craft] Inserted before dialog footer (PR review dialog)");
+        }
+      }
+    }
+
+    // Strategy 1d: PR review thread reply (form.js-inline-comment-form)
+    if (!inserted) {
+      const inlineForm = textarea.closest('form.js-inline-comment-form');
+      if (inlineForm) {
+        const actions = inlineForm.querySelector('.form-actions');
+        if (actions) {
+          actions.before(toolbar);
+          inserted = true;
+          console.log("[Polite Craft] Inserted before form actions (PR review thread reply)");
+        }
+      }
+    }
+
+    // Strategy 1c: Standalone Markdown input wrapper
+    if (!inserted && markdownInput) {
       markdownInput.after(toolbar);
       inserted = true;
       console.log("[Polite Craft] Inserted after Markdown input wrapper");

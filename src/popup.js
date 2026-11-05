@@ -7,6 +7,8 @@
   "use strict";
 
   const apiKeyInput = document.getElementById("apiKey");
+  const apiBaseUrlInput = document.getElementById("apiBaseUrl");
+  const modelInput = document.getElementById("model");
   const toneSelect = document.getElementById("defaultTone");
   const relSelect = document.getElementById("defaultRelationship");
   const saveBtn = document.getElementById("saveBtn");
@@ -15,9 +17,11 @@
   // ─── Load saved settings ──────────────────────────────────────────────
 
   chrome.storage.local.get(
-    ["apiKey", "tone", "relationship"],
+    ["apiKey", "apiBaseUrl", "model", "tone", "relationship"],
     (items) => {
       if (items.apiKey) apiKeyInput.value = items.apiKey;
+      if (items.apiBaseUrl) apiBaseUrlInput.value = items.apiBaseUrl;
+      if (items.model) modelInput.value = items.model;
       if (items.tone) toneSelect.value = items.tone;
       if (items.relationship) relSelect.value = items.relationship;
     }
@@ -27,6 +31,8 @@
 
   saveBtn.addEventListener("click", async () => {
     const apiKey = apiKeyInput.value.trim();
+    const apiBaseUrl = apiBaseUrlInput.value.trim().replace(/\/+$/, ""); // strip trailing slash
+    const model = modelInput.value.trim() || "deepseek-chat";
     const tone = toneSelect.value;
     const relationship = relSelect.value;
 
@@ -47,7 +53,7 @@
     // If there's an API key, validate it with a cheap request
     if (apiKey) {
       try {
-        const valid = await validateApiKey(apiKey);
+        const valid = await validateApiKey(apiKey, apiBaseUrl, model);
         if (!valid) {
           saveStatus.textContent = "⚠ Invalid API Key";
           saveStatus.className = "save-status error";
@@ -65,7 +71,7 @@
     }
 
     // Save to storage
-    chrome.storage.local.set({ apiKey, tone, relationship }, () => {
+    chrome.storage.local.set({ apiKey, apiBaseUrl, model, tone, relationship }, () => {
       saveStatus.textContent = "✓ Saved";
       saveStatus.className = "save-status success";
       saveBtn.disabled = false;
@@ -79,16 +85,19 @@
 
   // ─── API Key validation ───────────────────────────────────────────────
 
-  function validateApiKey(key) {
+  function validateApiKey(key, apiBaseUrl, model) {
+    const base = apiBaseUrl || "https://api.deepseek.com/v1";
+    const url = base.replace(/\/+$/, "") + "/chat/completions";
+    const modelName = model || "deepseek-chat";
     return new Promise((resolve, reject) => {
-      fetch("https://api.deepseek.com/v1/chat/completions", {
+      fetch(url, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${key}`
         },
         body: JSON.stringify({
-          model: "deepseek-chat",
+          model: modelName,
           messages: [{ role: "user", content: "ping" }],
           max_tokens: 5
         })

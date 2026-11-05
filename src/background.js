@@ -197,18 +197,21 @@ function logCacheUsage(usage = {}) {
 
 // ─── DeepSeek API ────────────────────────────────────────────────────────
 
-async function callDeepSeek(systemPrompt, userMessage, apiKey) {
+async function callDeepSeek(systemPrompt, userMessage, apiKey, apiBaseUrl, model) {
   console.log("[Polite Craft] LLM request — system prompt:\n", systemPrompt);
   console.log("[Polite Craft] LLM request — user message:\n", userMessage);
 
-  const resp = await fetch("https://api.deepseek.com/v1/chat/completions", {
+  const url = apiBaseUrl || "https://api.deepseek.com/v1";
+  const endpoint = url.replace(/\/+$/, "") + "/chat/completions";
+  const modelName = model || "deepseek-chat";
+  const resp = await fetch(endpoint, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${apiKey}`
     },
     body: JSON.stringify({
-      model: "deepseek-chat",
+      model: modelName,
       messages: [
         { role: "system", content: systemPrompt },
         { role: "user", content: userMessage }
@@ -243,11 +246,14 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   if (msg.action !== "translate") return;
 
   (async () => {
-    let apiKey;
+    let apiKey, apiBaseUrl, model;
     try {
-      apiKey = await new Promise(resolve => {
-        chrome.storage.local.get(["apiKey"], r => resolve(r.apiKey || ""));
+      const stored = await new Promise(resolve => {
+        chrome.storage.local.get(["apiKey", "apiBaseUrl", "model"], r => resolve(r));
       });
+      apiKey = stored.apiKey || "";
+      apiBaseUrl = stored.apiBaseUrl || "";
+      model = stored.model || "";
     } catch {
       sendResponse({ error: "Failed to read API Key from storage." });
       return;
@@ -271,7 +277,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
     });
 
     try {
-      const translated = await callDeepSeek(systemPrompt, userMessage, apiKey);
+      const translated = await callDeepSeek(systemPrompt, userMessage, apiKey, apiBaseUrl, model);
       sendResponse({ text: translated });
     } catch (err) {
       sendResponse({ error: err.message });

@@ -12,25 +12,31 @@
       <span class="logo-icon">🔤</span>
       <h1>Polite Craft</h1>
     </div>
-    <p class="subtitle">Write Chinese → Get professional English</p>
   </header>
 
   <section class="settings-section">
-    <h2>API Settings</h2>
+    <h2>API</h2>
     <div class="field">
-      <label for="apiKey">DeepSeek API Key</label>
-      <input type="password" id="apiKey" placeholder="sk-xxxxxxxxxxxxxxxx" autocomplete="off" />
-      <div class="hint">
-        Your key is stored locally only. Never uploaded anywhere.
-        Get one at <a href="https://platform.deepseek.com" target="_blank">platform.deepseek.com</a>
+      <label for="apiBaseUrl">Base URL</label>
+      <div class="input-suffix-wrapper">
+        <input type="text" id="apiBaseUrl" placeholder="https://api.deepseek.com/v1" autocomplete="off" />
+        <span class="input-suffix">/chat/completions</span>
       </div>
+    </div>
+    <div class="field">
+      <label for="apiKey">API Key</label>
+      <input type="password" id="apiKey" placeholder="sk-xxxxxxxxxxxxxxxx" autocomplete="off" />
+    </div>
+    <div class="field">
+      <label for="model">Model</label>
+      <input type="text" id="model" placeholder="deepseek-chat" autocomplete="off" />
     </div>
   </section>
 
   <section class="settings-section">
     <h2>Defaults</h2>
     <div class="field">
-      <label for="defaultTone">Default Tone</label>
+      <label for="defaultTone">Tone</label>
       <select id="defaultTone">
         <option value="constructive">建议</option>
         <option value="encouraging">鼓励</option>
@@ -41,7 +47,7 @@
       </select>
     </div>
     <div class="field">
-      <label for="defaultRelationship">Default Relationship</label>
+      <label for="defaultRelationship">Relationship</label>
       <select id="defaultRelationship">
         <option value="contributor">社区贡献者</option>
         <option value="maintainer">社区维护者</option>

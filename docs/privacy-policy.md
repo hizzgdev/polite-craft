@@ -1,6 +1,6 @@
 # GitHub 得体英文 — 隐私权政策
 
-**最后更新：2026 年 6 月 26 日**
+**最后更新：2026 年 11 月 5 日**
 
 本隐私权政策说明 Chrome 扩展程序 **「GitHub 得体英文」**（以下简称「本扩展」）如何处理与用户相关的信息。安装或使用本扩展，即表示你理解并同意本政策。
 
@@ -10,7 +10,7 @@
 
 本扩展帮助用户在 GitHub Pull Request / Issue 评论框中，将中文草稿转换为得体、可直接发送的英文回复。
 
-**我们不会运营自己的后端服务器来收集或存储你的数据。** 本扩展在本地浏览器中保存少量配置；在你主动点击「Generate English」时，读取当前 GitHub 页面上的公开信息，并将相关内容发送到你自行配置的 **DeepSeek API** 以生成英文结果。
+**我们不会运营自己的后端服务器来收集或存储你的数据。** 本扩展在本地浏览器中保存少量配置；在你主动点击「Generate English」时，读取当前 GitHub 页面上的公开信息，并将相关内容发送到你自行配置的 **AI API 服务**（默认 DeepSeek，可在设置中更改为其他兼容 OpenAI 接口的服务）以生成英文结果。
 
 ---
 
@@ -22,9 +22,11 @@
 
 | 数据项 | 用途 |
 |--------|------|
-| DeepSeek API Key | 调用 DeepSeek API 生成英文 |
+| API Key | 调用 AI API 生成英文 |
 | 语气偏好（tone） | 记住你选择的写作风格 |
 | 关系偏好（relationship） | 记住你与评论对象的关系设定 |
+| API Base URL（可选） | 自定义 API 服务地址 |
+| Model（可选） | 自定义模型名称 |
 
 上述数据**仅保存在你的浏览器本地**，不会上传至扩展开发者运营的服务器，也不会通过 `chrome.storage.sync` 同步到其他设备。
 
@@ -39,9 +41,9 @@
 
 本扩展**不会**在后台持续扫描页面，也**不会**在你未点击生成按钮时自动读取上述内容。
 
-### 2.3 发送给 DeepSeek API 的信息
+### 2.3 发送给 AI API 的信息
 
-为生成英文回复，本扩展会将以下信息通过 HTTPS 发送至 **DeepSeek 官方 API**（`https://api.deepseek.com`）：
+为生成英文回复，本扩展会将以下信息通过 HTTPS 发送至你在设置中配置的 **AI API 服务**（默认 `https://api.deepseek.com`，可在设置中更改为其他兼容 OpenAI 接口的地址）：
 
 - 你在评论框中输入的中文草稿
 - 上述页面上下文（经处理后用于 Prompt）
@@ -49,7 +51,7 @@
 
 **关于对话参与者：** 发送给 AI 的对话上下文中，参与者以 `current user`、`user1`、`user2` 等匿名角色标签表示，**不会**将 GitHub 用户名与真实身份的对应关系一并发送。
 
-此外，在设置页保存 API Key 时，本扩展可能向 DeepSeek 发起一次轻量级请求以校验 Key 是否有效。
+此外，在设置页保存 API Key 时，本扩展可能向你配置的 API 服务发起一次轻量级请求以校验 Key 是否有效。
 
 ---
 
@@ -82,9 +84,9 @@
 
 ## 5. 第三方服务
 
-### 5.1 DeepSeek
+### 5.1 用户配置的 AI API 服务
 
-本扩展依赖你自行申请并配置的 **DeepSeek API**。你向 DeepSeek 发送的数据受其隐私政策与服务条款约束。请在 [DeepSeek 平台](https://platform.deepseek.com) 查阅相关说明。
+本扩展依赖你自行申请并配置的 **AI API 服务**。默认使用 DeepSeek API，你可在扩展设置中更改为其他兼容 OpenAI 接口的地址（如阿里云 MaaS、OpenAI、Moonshot 等）。你向这些服务发送的数据受其各自的隐私政策与服务条款约束。
 
 **重要：** API Key 由你本人提供并保存在本地。扩展开发者无法访问你的 API Key，也不托管任何中转服务。
 
@@ -100,9 +102,8 @@
 
 - **`storage`**：在本地保存 API Key 与偏好设置
 - **`https://github.com/*`**：在 GitHub 页面注入工具栏并读取评论相关上下文
-- **`https://api.deepseek.com/*`**：调用 DeepSeek API 生成英文并校验 API Key
-
-本扩展不请求 `activeTab` 等额外权限。
+- **`https://api.deepseek.com/*`**：调用 DeepSeek API（默认服务）生成英文并校验 API Key
+- **`https://token-plan.cn-beijing.maas.aliyuncs.com/*`**：调用阿里云 MaaS API（用户在设置中可选的替代服务）
 
 ---
 
@@ -110,7 +111,7 @@
 
 你可以随时：
 
-- 在扩展设置页修改或清空 DeepSeek API Key
+- 在扩展设置页修改或清空 API Key
 - 修改语气、关系等偏好
 - 在发送前编辑或删除生成的英文内容
 - 通过 Chrome 扩展管理页（`chrome://extensions`）禁用或卸载本扩展
@@ -139,4 +140,4 @@
 
 ## English Summary
 
-**GitHub 得体英文** is a Chrome extension that helps you draft English replies on GitHub PR/Issue comment boxes. We do not operate a backend that collects your data. Your API key and preferences are stored locally via `chrome.storage.local`. When you click "Generate English", the extension reads public GitHub page context and your Chinese draft, then sends that information to **DeepSeek API** (configured by you) to generate English text. We do not sell data, run analytics, persist page content, or auto-post comments. Uninstalling the extension removes locally stored settings.
+**GitHub 得体英文** is a Chrome extension that helps you draft English replies on GitHub PR/Issue comment boxes. We do not operate a backend that collects your data. Your API key and preferences are stored locally via `chrome.storage.local`. When you click "Generate English", the extension reads public GitHub page context and your Chinese draft, then sends that information to your **configured AI API service** (default: DeepSeek; you can change it to any OpenAI-compatible endpoint in settings) to generate English text. We do not sell data, run analytics, persist page content, or auto-post comments. Uninstalling the extension removes locally stored settings.

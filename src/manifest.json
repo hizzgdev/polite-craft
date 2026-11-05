@@ -6,7 +6,8 @@
   "permissions": ["storage"],
   "host_permissions": [
     "https://github.com/*",
-    "https://api.deepseek.com/*"
+    "https://api.deepseek.com/*",
+    "https://token-plan.cn-beijing.maas.aliyuncs.com/*"
   ],
   "action": {
     "default_popup": "popup.html",
